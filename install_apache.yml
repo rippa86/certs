@@ -1,6 +1,6 @@
 ---
 - name: Install httpd web server
-  hosts: web-servers
+  hosts: web_servers
   
   tasks:
   
