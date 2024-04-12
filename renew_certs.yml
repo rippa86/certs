@@ -2,5 +2,12 @@
 - name: renew certs using certbot role
   hosts: web_servers
 
-  roles:
-    - geerlingguy.certbot 
+  tasks:
+  - name: enable EPEL repo
+    ansible.builtin.dnf:
+      name: 'https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm'
+      state: present
+
+  - name: run certbot role
+    include_role:
+      name: geerlingguy.certbot 

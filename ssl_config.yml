@@ -1,0 +1,37 @@
+---
+- name: Set up SSL and point to new certs
+  hosts: web_servers
+
+  tasks:
+  - name: enable EPEL repo
+    ansible.builtin.dnf:
+      name: 'https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm'
+      state: present
+
+  - name: install SSL package
+    ansible.builtin.dnf:
+      name: mod_ssl
+      state: present
+
+  - name: add SSL Certificate file to SSL config
+    ansible.builtin.lineinfile:
+      path: /etc/httpd/conf.d/ssl.conf
+      search_string: 'SSLCertificateFile'
+      line: 'SSLCertificateFile /etc/letsencrypt/live/{{ domain_name }}/fullchain.pem'
+
+  - name: add SSL private key file to SSL config
+    ansible.builtin.lineinfile:
+      path: /etc/httpd/conf.d/ssl.conf
+      search_string: 'SSLCertificateKeyFile'
+      line: 'SSLCertificateKeyFile /etc/letsencrypt/live/{{ domain_name }}/privkey.pem'
+
+  - name: add SSL Certificate chain file to SSL config
+    ansible.builtin.lineinfile:
+      path: /etc/httpd/conf.d/ssl.conf
+      search_string: 'SSLCertificateChainFile'
+      line: 'SSLCertificateChainFile /etc/letsencrypt/live/{{ domain_name }}/fullchain.pem'
+  
+  - name: restart httpd
+    ansible.builtin.service:
+      name: httpd
+      state: restarted
