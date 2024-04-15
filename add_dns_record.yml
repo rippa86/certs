@@ -1,0 +1,8 @@
+---
+- name: add dns record for new web server
+  hosts: all
+
+  tasks:
+  - name: check if variable is there
+    debug:
+      var: hostvars['localhost'][info].instances[0].public_dns_name
