@@ -17,7 +17,15 @@
     delegate_to: localhost
     register: info
   
+  - name: get public dns name of new ec2 instance
+    amazon.aws.ec2_instance_info:
+      instance_ids: "{{ info.instance_ids }}"
+    delegate_to: localhost
+    register: ec2_info
+
   - name: debug
     debug: 
-      var: info
+      var: ec2_info
+  
+  
     
