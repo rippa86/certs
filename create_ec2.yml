@@ -5,7 +5,7 @@
   tasks:
   - name: start an instance with a public IP address
     amazon.aws.ec2_instance:
-      name: "aap_test"
+      name: "{{ vm_name }}"
       key_name: "rhlab"
       vpc_subnet_id: subnet-0498e176e01ac3af1
       instance_type: t2.small
