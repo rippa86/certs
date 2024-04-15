@@ -1,0 +1,17 @@
+---
+- name: create rhel9 ec2 instance
+  hosts: all
+
+  tasks:
+  - name: start an instance with a public IP address
+    amazon.aws.ec2_instance:
+      name: "aap_test"
+      key_name: "rhlab"
+      vpc_subnet_id: subnet-0498e176e01ac3af1
+      instance_type: t2.small
+      security_group: launch-wizard-1
+      network:
+        assign_public_ip: true
+      image_id: ami-0d77c9d87c7e619f9  #rhel 9 AMI
+    delegate_to: localhost
+    
