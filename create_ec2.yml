@@ -20,6 +20,7 @@
   - name: get public dns name of new ec2 instance
     amazon.aws.ec2_instance_info:
       instance_ids: "{{ info.instance_ids }}"
+      region: us-east-2
     delegate_to: localhost
     register: ec2_info
 
