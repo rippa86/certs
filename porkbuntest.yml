@@ -12,6 +12,7 @@
       body:
         secretapikey: "{{ porkbun_secret_key }}"
         apikey: "{{ porkbun_api_key }}"
+      body_format: json
     register: results
   
   - name: print request results
