@@ -21,6 +21,25 @@
     debug:
       var: info.instances[0].public_dns_name
   
+  - name: add new DNS record
+    ansible.builtin.uri:
+      url: https://porkbun.com/api/json/v3/dns/create/ramzidev.com
+      method: POST
+      return_content: true
+      body:
+        secretapikey: "{{ porkbun_secret_key }}"
+        apikey: "{{ porkbun_api_key }}"
+        name: "{{ vm_name }}"
+        type: A
+        content: "{{ info.instances[0].public_ip_address }}"
+        ttl: 600
+      body_format: json
+    register: results
+
+  - name: print results
+    debug:
+      var: results
+  
 #  - name: get public dns name of new ec2 instance
 #    amazon.aws.ec2_instance_info:
 #      instance_ids: "{{ info.instance_ids }}"
