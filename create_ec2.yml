@@ -14,6 +14,8 @@
         assign_public_ip: true
       image_id: ami-0d77c9d87c7e619f9  #rhel 9 AMI
       region: us-east-2
+      tags:
+        type: web_servers
     delegate_to: localhost
     register: info
   
