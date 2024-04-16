@@ -2,9 +2,14 @@
 - name: Install httpd web server
   hosts: web_servers
   gather_facts: no
-  
+
   tasks:
-  
+  - name: wait for servers to come up
+    ansible.builtin.wait_for:
+      timeout: 30
+    delegate_to: localhost
+
+      
   - name: install httpd
     dnf:
       name: httpd
