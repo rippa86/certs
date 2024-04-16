@@ -1,0 +1,19 @@
+---
+- name: test porkbun api
+  hosts: localhost
+
+  tasks:
+
+  - name: get DNS records
+    ansible.builtin.uri:
+      url: https://porkbun.com/api/json/v3/dns/retrieve/ramzidev.com
+      method: GET
+      return_content: true
+      body:
+        secretapikey: "{{ porkbun_secret_key }}"
+        apikey: "{{ porkbun_api_key }}"
+    register: results
+  
+  - name: print request results
+    debug:
+      var: results
