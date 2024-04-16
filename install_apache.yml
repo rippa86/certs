@@ -7,7 +7,9 @@
   - name: install httpd
     dnf:
       name: httpd
-      state: latest
+      state: latest 
+    retries: 30
+    delay: 3
 
   - name: add index.html
     template:
