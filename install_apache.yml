@@ -5,14 +5,8 @@
 
   tasks:
   - name: wait for servers to come up
-    ansible.builtin.wait_for:
-      host: "{{ inventory_hostname }}"
-      sleep: 5
-      timeout: 300
-      port: 22
-    delegate_to: localhost
+    ansible.builtin.wait_for_connection:
 
-      
   - name: install httpd
     dnf:
       name: httpd
