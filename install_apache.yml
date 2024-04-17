@@ -6,7 +6,10 @@
   tasks:
   - name: wait for servers to come up
     ansible.builtin.wait_for:
-      timeout: 30
+      host: "{{ inventory_hostname }}"
+      sleep: 5
+      timeout: 300
+      port: 22
     delegate_to: localhost
 
       
