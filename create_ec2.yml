@@ -19,10 +19,6 @@
     delegate_to: localhost
     register: info
   
-  - name: print public dns name
-    debug:
-      var: info.instances[0].public_dns_name
-  
   - name: add new DNS record
     ansible.builtin.uri:
       url: https://porkbun.com/api/json/v3/dns/create/ramzidev.com
@@ -37,17 +33,6 @@
         ttl: 600
       body_format: json
     register: results
-
-  - name: print results
-    debug:
-      var: results
-  
-#  - name: get public dns name of new ec2 instance
-#    amazon.aws.ec2_instance_info:
-#      instance_ids: "{{ info.instance_ids }}"
-#      region: us-east-2
-#    delegate_to: localhost
-#    register: ec2_info
 
   
   
