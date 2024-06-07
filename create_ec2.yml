@@ -33,6 +33,10 @@
         ttl: 600
       body_format: json
     register: results
+  
+  - name: Wait 10 seconds for instance to be listed
+    ansible.builtin.wait_for:
+      timeout: 10
 
   
   
