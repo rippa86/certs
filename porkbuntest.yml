@@ -6,12 +6,12 @@
 
   - name: get DNS records
     ansible.builtin.uri:
-      url: https://porkbun.com/api/json/v3/dns/retrieve/ramzidev.com
+      url: "https://porkbun.com/api/json/v3/dns/retrieve/{{ domain_name }}"
       method: POST
       return_content: true
       body:
-        secretapikey: "{{ porkbun_secret_key }}"
-        apikey: "{{ porkbun_api_key }}"
+        secretapikey: "{{ dns_secret_key }}"
+        apikey: "{{ dns_api_key }}"
       body_format: json
     register: results
   

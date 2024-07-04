@@ -1,6 +1,6 @@
 ---
 - name: Install httpd web server
-  hosts: web_servers
+  hosts: "{{ hosts }}"
   gather_facts: no
 
   tasks:
@@ -8,19 +8,19 @@
     ansible.builtin.wait_for_connection:
 
   - name: install httpd
-    dnf:
+    ansible.builtin.dnf:
       name: httpd
       state: latest 
     retries: 30
     delay: 3
 
   - name: add index.html
-    template:
+    ansible.builtin.template:
       src: index.html.j2
       dest: /var/www/html/index.html
 
   - name: httpd running
-    service:
+    ansible.builtin.service:
       name: httpd
       enabled: true
       state: started

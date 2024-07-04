@@ -1,6 +1,6 @@
 ---
 - name: Set up SSL and point to new certs
-  hosts: web_servers
+  hosts: "{{ hosts }}"
 
   tasks:
   - name: enable EPEL repo

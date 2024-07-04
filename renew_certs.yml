@@ -1,6 +1,6 @@
 ---
 - name: renew certs using certbot role
-  hosts: web_servers
+  hosts: "{{ hosts }}"
 
   tasks:
   - name: enable EPEL repo
