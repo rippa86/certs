@@ -2,8 +2,8 @@
   hosts: localhost
 
   tasks:
-- name: Post URL to Slack channel
-  community.general.slack:
-    token: "{{ slack_token }}"
-    channel: "#devops"
-    msg: "{{ message }}"
+  - name: Post URL to Slack channel
+    community.general.slack:
+      token: "{{ slack_token }}"
+      channel: "#devops"
+      msg: "{{ message }}"
