@@ -1,0 +1,9 @@
+- name: create rhel9 ec2 instance
+  hosts: localhost
+
+  tasks:
+- name: Post URL to Slack channel
+  community.general.slack:
+    token: "{{ slack_token }}"
+    channel: "#devops"
+    msg: "{{ message }}"
