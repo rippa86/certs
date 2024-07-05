@@ -36,16 +36,16 @@
   
   - name: add host to controller
     ansible.controller.bulk_host_create:
-      inventory: dns_demo
-        hosts:
-          name: "{{ info.instances[0].public_ip_address }}"
-          description: "Host 1"
-          variables: |
-            ansible_user: ec2_user
-            ip_address: "{{ info.instances[0].public_ip_address }}"
-            domain_name: "{{ domain_name }}"
-            vm_name: "{{ vm_name }}"
-        state: present
+      inventory: web_servers
+      hosts:
+        - name: "{{ info.instances[0].public_ip_address }}"
+      #     description: "Host 1"
+      #     variables: |
+      #       ansible_user: ec2_user
+      #       ip_address: "{{ info.instances[0].public_ip_address }}"
+      #       domain_name: "{{ domain_name }}"
+      #       vm_name: "{{ vm_name }}"
+      # state: present
 
   - name: Wait 30 seconds for instance to be listed
     ansible.builtin.wait_for:
