@@ -1,0 +1,16 @@
+---
+- name: ServiceNow Create Incident
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  
+  tasks:
+  - name: get DNS records
+    ansible.builtin.uri:
+      url: "{{ url }}"
+      method: "{{ uri_method }}"
+      return_content: true
+    register: results
+
+  - ansible.builtin.debug: 
+      var: results 
