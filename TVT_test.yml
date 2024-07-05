@@ -5,8 +5,13 @@
   gather_facts: no
   
   tasks:
-    # trunk-ignore(checkov/CKV2_ANSIBLE_1)
-    - name: get DNS records
+    - name: set stats
+      set_stats:
+        data:
+          hostname: "{{ ansible_facts['ansible_hostname']"
+          url:  "{{ url }}"
+
+    - name: Execute TVT test
       ansible.builtin.uri:
         url: "{{ url }}"
         method: "{{ uri_method }}"
