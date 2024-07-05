@@ -38,7 +38,7 @@
     ansible.controller.bulk_host_create:
       inventory: dns_demo
         hosts:
-          - name: "{{ info.instances[0].public_ip_address }}"  
+          - name: "{{ info.instances[0].public_ip_address }}"
             description: "Host 1"
             variables: |
               ansible_user: ec2_user

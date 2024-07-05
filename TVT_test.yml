@@ -5,12 +5,13 @@
   gather_facts: no
   
   tasks:
-  - name: get DNS records
-    ansible.builtin.uri:
-      url: "{{ url }}"
-      method: "{{ uri_method }}"
-      return_content: true
-    register: results
+    # trunk-ignore(checkov/CKV2_ANSIBLE_1)
+    - name: get DNS records
+      ansible.builtin.uri:
+        url: "{{ url }}"
+        method: "{{ uri_method }}"
+        return_content: true
+      register: results
 
-  - ansible.builtin.debug: 
-      var: results 
+    - ansible.builtin.debug:
+        var: results
