@@ -13,10 +13,9 @@
         username: "{{ snow_username }}"
         password: "{{ snow_password }}"
       state: new
-      short_description: "{{ short_description: }}"
+      short_description: "{{ short }}"
       urgency: 2
       impact: 2
-      
       description: 
         "{{ description }}"
       other:
