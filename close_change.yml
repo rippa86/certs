@@ -13,6 +13,17 @@
         username: "{{ username }}"
         password: "{{ password }}"
       type: normal
+      state: review
+      number: "{{ chg_number }}"
+    register: change_result
+    
+  - name: Update ServiceNow ticket to close
+    servicenow.itsm.change_request:
+      instance:
+        host: "{{ instance }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+      type: normal
       state: closed
       close_code: "successful"
       close_notes: "Closed"
