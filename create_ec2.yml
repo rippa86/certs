@@ -36,7 +36,10 @@
   
   - name: add host to controller
     ansible.controller.bulk_host_create:
-      inventory: web_servers
+      controller_host: "{{ aap_url }}"
+      controller_username: "{{ aap_user }}"
+      controller_password: "{{ aap_passwd }}"
+      inventory: "web_server"
       hosts:
         - name: "{{ info.instances[0].public_ip_address }}"
       #     description: "Host 1"
