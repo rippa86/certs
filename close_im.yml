@@ -10,9 +10,9 @@
   - name: Update ServiceNow ticket to close
     servicenow.itsm.api:
       instance:
-        host: "{{ snow_instance }}"
-        username: "{{ snow_username }}"
-        password: "{{ snow_password }}"
+        host: "{{ instance }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
       resource: incident
       action: patch
       sys_id: "{{ inc_sysid }}"
@@ -22,4 +22,3 @@
         close_notes: resolved by ansible
         incident_state: 7
     register: snow_var
-
