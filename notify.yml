@@ -2,6 +2,8 @@
   hosts: localhost
 
   tasks:
+  - ansible.builtin.set_fact:
+      message: "{{ inc_number }} - Rippademo.com TVT test Failure"
   - name: Post URL to Slack channel
     community.general.slack:
       token: "{{ slack_token }}"

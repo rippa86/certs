@@ -6,6 +6,11 @@
   gather_facts: no
   
   tasks:
+
+  - name: set_facts
+    ansible.builtin.set_fact:
+      description: "{{ url }} - {{ error }}"
+      short: "{{ url }} - HTTPS TVT FAILURE"
   - name: Create Incident
     servicenow.itsm.incident:
       instance:
