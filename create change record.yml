@@ -28,13 +28,13 @@
       register: change_result
 
     - name: Link incident to change record
-      itsm.servicenow.snow_record:
+      servicenow.itsm.snow_record:
         instance: "{{ instance }}"
-        table: "task_rel_ci"  # Adjust the table if necessary
+        table: "task_rel_ci"  
         username: "{{ username }}"
         password: "{{ password }}"
         data:
-          type: "fixed by"  # Adjust this based on your ServiceNow instance
+          type: "fixed by"
           change_request: "{{ change_result.record.sys_id }}"
           incident: "{{ inc_number }}"
       register: link_result
