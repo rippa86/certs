@@ -27,6 +27,12 @@
         risk: low
       register: change_result
 
+    - name: set stats
+      ansible.builtin.set_stats:
+        data:
+          chg_number: "{{ change_result.record.number }}"
+          chg_sysid: "{{ change_result.record.sys_id }}"
+
     # - name: Link incident to change record
     #   servicenow.itsm.snow_record:
     #     instance: "{{ instance }}"
@@ -48,11 +54,3 @@
     #     data:
     #       change_request: "{{ change_result.record.sys_id }}"
     #   register: update_result
-
-    - name: Debug change request result
-      debug:
-        var: change_result
-
-    - name: Debug incident update result
-      debug:
-        var: update_result

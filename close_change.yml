@@ -1,0 +1,38 @@
+---
+- name: ServiceNow Close Incident
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  
+  tasks:
+
+  - name: Update ServiceNow ticket to close
+    servicenow.itsm.change_request:
+      instance:
+        host: "{{ instance }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+      type: normal
+      state: closed
+      close_code: "successful"
+      close_notes: "Closed"
+      assignment_group: some.group
+      number: "{{ chg_number }}"
+    register: change_result
+
+  - name: Create Incident
+    servicenow.itsm.incident:
+      instance:
+        host: "{{ instance }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+      number: "{{ change_result.record.short_description }}"
+    register: new_incident
+
+  - name: set stats
+    ansible.builtin.set_stats:
+      data:
+        inc_number: "{{ new_incident.record.number }}"
+        inc_sysid: "{{ new_incident.record.sys_id }}"
+    
+  
