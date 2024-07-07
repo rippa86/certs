@@ -16,7 +16,6 @@
       state: closed
       close_code: "successful"
       close_notes: "Closed"
-      assignment_group: some.group
       number: "{{ chg_number }}"
     register: change_result
 
