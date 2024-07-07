@@ -32,7 +32,7 @@
       src: index.html.j2
       dest: /var/www/html/index.html
 
-  - name: add index.html
+  - name: add rippademo.conf
     ansible.builtin.template:
       src: rippademo.conf.j2
       dest: /etc/httpd/conf.d/rippademo.conf

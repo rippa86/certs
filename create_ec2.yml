@@ -42,6 +42,8 @@
       inventory: "web_server"
       hosts:
         - name: "{{ info.instances[0].public_ip_address }}"
+          groups: 
+            - "web_server"
       #     description: "Host 1"
       #     variables: |
       #       ansible_user: ec2_user
