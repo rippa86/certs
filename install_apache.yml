@@ -1,11 +1,17 @@
 ---
 - name: Install httpd web server
-  hosts: "{{ hosts }}"
+  hosts: web_server
   gather_facts: no
 
   tasks:
   - name: wait for servers to come up
     ansible.builtin.wait_for_connection:
+
+  - name: enable EPEL repo
+    ansible.builtin.dnf:
+      disable_gpg_check: true
+      name: "https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm"
+      state: present
 
   - name: install httpd
     ansible.builtin.dnf:
@@ -14,9 +20,21 @@
     retries: 30
     delay: 3
 
+  - name: install open ssl
+    ansible.builtin.dnf: 
+      name: 
+        - python3-certbot-apache
+        - openssl
+        - mod_ssl
+
   - name: add index.html
     ansible.builtin.template:
       src: index.html.j2
+      dest: /var/www/html/index.html
+
+  - name: add index.html
+    ansible.builtin.template:
+      src: rippademo.conf.j2
       dest: /var/www/html/index.html
 
   - name: httpd running
