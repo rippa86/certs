@@ -27,16 +27,27 @@
         risk: low
       register: change_result
 
-    - name: Attach change request to incident
-      servicenow.itsm.incident:
-        instance:
-          host: "{{ instance }}"
-          username: "{{ username }}"
-          password: "{{ password }}"
-        number: "{{ inc_number }}"
+    - name: Link incident to change record
+      itsm.servicenow.snow_record:
+        instance: "{{ instance }}"
+        table: "task_rel_ci"  # Adjust the table if necessary
+        username: "{{ username }}"
+        password: "{{ password }}"
         data:
+          type: "fixed by"  # Adjust this based on your ServiceNow instance
           change_request: "{{ change_result.record.sys_id }}"
-      register: update_result
+          incident: "{{ inc_number }}"
+      register: link_result
+    # - name: Attach change request to incident
+    #   servicenow.itsm.incident:
+    #     instance:
+    #       host: "{{ instance }}"
+    #       username: "{{ username }}"
+    #       password: "{{ password }}"
+    #     number: "{{ inc_number }}"
+    #     data:
+    #       change_request: "{{ change_result.record.sys_id }}"
+    #   register: update_result
 
     - name: Debug change request result
       debug:
