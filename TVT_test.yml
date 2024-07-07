@@ -10,13 +10,22 @@
     #     data:
     #       hostname: "{{ ansible_facts['ansible_hostname'] }}"
     #       url:  "{{ url }}"
+    - block:
+      - name: Execute TVT test
+        ansible.builtin.uri:
+          url: "{{ item }}"
+          method: "{{ uri_method }}"
+          return_content: true
+        register: results
+        loop: "{{ url }}"
+      - ansible.builtin.debug:
+          var: results
 
-    - name: Execute TVT test
-      ansible.builtin.uri:
-        url: "{{ item }}"
-        method: "{{ uri_method }}"
-        return_content: true
-      register: results
-      loop: "{{ url }}"
-    - ansible.builtin.debug:
-        var: results
+      rescue:
+      - name: set stats
+        ansible.builtin.set_stats:
+          data:
+            inc_number: "{{ results.msg }}"
+            url: "{{ url }}"
+      - fail:
+          msg: "TVT Test Failure"
