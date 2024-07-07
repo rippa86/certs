@@ -1,38 +1,39 @@
 ---
-- name: Create a new change record in ServiceNow and link an incident
+- name: Create a change record in ServiceNow and attach an incident
   hosts: localhost
   gather_facts: no
+
+  vars:
+    incident_number: "INC0010001"  # Replace with your incident number
+    change_request_data:
+      short_description: "Generate new SSL Cert"
+      description: "creating a new SSL certificate for rippademo.com"
+      category: "Software"
+      priority: "2"
+
   tasks:
-    - name: Create change record
-      community.servicenow.snow_record:
+    - name: Create change request
+      servicenow.itsm.change_request:
         instance: "{{ instance }}"
-        table: "change_request"
         username: "{{ username }}"
         password: "{{ password }}"
-        data:
-          short_description: "Generate new SSL certificate "
-          description: "This change was created via Ansible playbook for the purpose of renewing ssl certificate for rippademo.com"
-          category: "Software"
-          risk: "moderate"
-          impact: "low"
+        data: "{{ change_request_data }}"
       register: change_result
 
-    - name: Display change result
+    - name: Attach change request to incident
+      servicenow.itsm.incident:
+        instance: "{{ instance }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        number: "{{ inc_number }}"
+        data:
+          change_request: "{{ change_result.record.sys_id }}"
+      register: update_result
+
+    - name: Debug change request result
       debug:
         var: change_result
 
-    - name: Link incident to change record
-      community.servicenow.snow_record:
-        instance: "{{ instance }}"
-        table: "incident"
-        username: "{{ username }}"
-        password: "{{ password }}"
-        query:
-          number: "{{ inc_number }}"  # You need to provide the incident number
-        data:
-          change_request: "{{ change_result.record.sys_id }}"
-      register: incident_result
-
-    - name: Display incident update result
+    - name: Debug incident update result
       debug:
-        var: incident_result
+        var: update_result
