@@ -19,18 +19,18 @@
       state: started
       enabled: yes
 
-    - name: Obtain SSL certificate from Let's Encrypt
-      ansible.builtin.command: certbot --apache -n -d rippademo.com --non-interactive --agree-tos --email rippa@demo.com
-      register: certbot_result
+  - name: Obtain SSL certificate from Let's Encrypt
+    ansible.builtin.command: certbot --apache -n -d rippademo.com --non-interactive --agree-tos --email rippa@demo.com
+    register: certbot_result
 
-    - name: Debug Certbot result
-      ansible.builtin.debug:
-        var: certbot_result
+  - name: Debug Certbot result
+    ansible.builtin.debug:
+      var: certbot_result
 
-    - name: Restart Apache to apply new certificate
-      ansible.builtin.service:
-        name: httpd
-        state: restarted    
+  - name: Restart Apache to apply new certificate
+    ansible.builtin.service:
+      name: httpd
+      state: restarted    
   
   # - name: force renew
   #   ansible.builtin.shell: sudo certbot renew --force-renewal
