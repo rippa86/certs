@@ -35,7 +35,7 @@
   - name: add index.html
     ansible.builtin.template:
       src: rippademo.conf.j2
-      dest: /var/www/html/index.html
+      dest: /etc/httpd/conf.d/rippademo.conf
 
   - name: httpd running
     ansible.builtin.service:
