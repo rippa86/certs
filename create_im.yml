@@ -25,5 +25,6 @@
 
   - name: set stats
     ansible.builtin.set_stats:
-      inc_number: "{{ new_incident.record.number }}"
-      inc_sysid: "{{ new_incident.record.sys_id }}"
+      data:
+        inc_number: "{{ new_incident.record.number }}"
+        inc_sysid: "{{ new_incident.record.sys_id }}"
