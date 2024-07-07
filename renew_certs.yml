@@ -13,6 +13,6 @@
     include_role:
       name: geerlingguy.certbot
   
-  - name: force renew
-    ansible.builtin.shell: sudo certbot renew --force-renewal
-    tags: force
+  # - name: force renew
+  #   ansible.builtin.shell: sudo certbot renew --force-renewal
+  #   tags: force
