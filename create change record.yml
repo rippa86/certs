@@ -15,7 +15,7 @@
     - name: Create change request
       servicenow.itsm.change_request:
         instance:
-          instance: "{{ instance }}"
+          host: "{{ instance }}"
           username: "{{ username }}"
           password: "{{ password }}"
         type: normal
@@ -30,7 +30,7 @@
     - name: Attach change request to incident
       servicenow.itsm.incident:
         instance:
-          instance: "{{ instance }}"
+          host: "{{ instance }}"
           username: "{{ username }}"
           password: "{{ password }}"
         number: "{{ inc_number }}"
