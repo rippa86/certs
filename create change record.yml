@@ -14,17 +14,25 @@
   tasks:
     - name: Create change request
       servicenow.itsm.change_request:
-        instance: "{{ instance }}"
-        username: "{{ username }}"
-        password: "{{ password }}"
-        data: "{{ change_request_data }}"
+        instance:
+          instance: "{{ instance }}"
+          username: "{{ username }}"
+          password: "{{ password }}"
+        type: normal
+        state: new
+        requested_by: AAP
+        short_description: Generate new SSL Cert"
+        description: "creating a new SSL certificate for rippademo.com"
+        priority: moderate
+        risk: low
       register: change_result
 
     - name: Attach change request to incident
       servicenow.itsm.incident:
-        instance: "{{ instance }}"
-        username: "{{ username }}"
-        password: "{{ password }}"
+        instance:
+          instance: "{{ instance }}"
+          username: "{{ username }}"
+          password: "{{ password }}"
         number: "{{ inc_number }}"
         data:
           change_request: "{{ change_result.record.sys_id }}"
