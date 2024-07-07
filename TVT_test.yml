@@ -2,7 +2,7 @@
 - name: ServiceNow Create Incident
   hosts: localhost
   connection: local
-  gather_facts: no
+  gather_facts: yes
   
   tasks:
     - name: set stats
@@ -13,10 +13,10 @@
 
     - name: Execute TVT test
       ansible.builtin.uri:
-        url: "{{ url }}"
+        url: "{{ item }}"
         method: "{{ uri_method }}"
         return_content: true
       register: results
-
+      loop: "{{ url }}"
     - ansible.builtin.debug:
         var: results
