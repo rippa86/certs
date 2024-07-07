@@ -13,19 +13,20 @@
     - block:
       - name: Execute TVT test
         ansible.builtin.uri:
-          url: "{{ item }}"
+          url: "{{ url }}"
           method: "{{ uri_method }}"
           return_content: true
-        register: results
-        loop: "{{ url }}"
+        register: uriresults
       - ansible.builtin.debug:
-          var: results
+          var: uriresults
 
       rescue:
+      - ansible.builtin.debug:
+          var: uriresults
       - name: set stats
         ansible.builtin.set_stats:
           data:
-            inc_number: "{{ results.msg }}"
+            error: "{{ uriresults.msg }}"
             url: "{{ url }}"
       - fail:
           msg: "TVT Test Failure"
