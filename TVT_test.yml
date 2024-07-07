@@ -5,11 +5,11 @@
   gather_facts: yes
   
   tasks:
-    - name: set stats
-      set_stats:
-        data:
-          hostname: "{{ ansible_facts['ansible_hostname'] }}"
-          url:  "{{ url }}"
+    # - name: set stats
+    #   set_stats:
+    #     data:
+    #       hostname: "{{ ansible_facts['ansible_hostname'] }}"
+    #       url:  "{{ url }}"
 
     - name: Execute TVT test
       ansible.builtin.uri:
