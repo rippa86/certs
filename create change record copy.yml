@@ -1,0 +1,78 @@
+---
+- name: Create a change record in ServiceNow and attach an incident
+  hosts: localhost
+  gather_facts: no
+
+  vars:
+    incident_number: "INC0010001"  # Replace with your incident number
+    change_request_data:
+      short_description: "Generate new SSL Cert"
+      description: "creating a new SSL certificate for rippademo.com"
+      category: "Software"
+      priority: "2"
+
+  tasks:
+    - name: Create change request
+      servicenow.itsm.change_request:
+        instance:
+          host: "{{ instance }}"
+          username: "{{ username }}"
+          password: "{{ password }}"
+        type: normal
+        state: new
+        requested_by: AAP
+        short_description: "{{ inc_number }}"
+        description: "creating a new SSL certificate for rippademo.com"
+        priority: moderate
+        risk: low
+        data: 
+          incidents_fixed_by_change: 4715ab62a9fe1981018c3efb96143495
+      register: change_result
+      ignore_errors: yes
+    
+    - name: Create change request
+      servicenow.itsm.change_request:
+        instance:
+          host: "{{ instance }}"
+          username: "{{ username }}"
+          password: "{{ password }}"
+        type: normal
+        state: new
+        requested_by: AAP
+        short_description: "{{ inc_number }}"
+        description: "creating a new SSL certificate for rippademo.com"
+        priority: moderate
+        risk: low
+        incidents_fixed_by_change: 4715ab62a9fe1981018c3efb96143495
+      register: change_result
+      ignore_errors: yes
+
+
+
+    - name: set stats
+      ansible.builtin.set_stats:
+        data:
+          chg_number: "{{ change_result.record.number }}"
+          chg_sysid: "{{ change_result.record.sys_id }}"
+
+    # - name: Link incident to change record
+    #   servicenow.itsm.snow_record:
+    #     instance: "{{ instance }}"
+    #     table: "task_rel_ci"
+    #     username: "{{ username }}"
+    #     password: "{{ password }}"
+    #     data:
+    #       type: "fixed by"
+    #       change_request: "{{ change_result.record.sys_id }}"
+    #       incident: "{{ inc_number }}"
+    #   register: link_result
+    # - name: Attach change request to incident
+    #   servicenow.itsm.incident:
+    #     instance:
+    #       host: "{{ instance }}"
+    #       username: "{{ username }}"
+    #       password: "{{ password }}"
+    #     number: "{{ inc_number }}"
+    #     data:
+    #       change_request: "{{ change_result.record.sys_id }}"
+    #   register: update_result
