@@ -37,11 +37,11 @@
           username: "{{ username }}"
           password: "{{ password }}"
         action: post
-        resource: /api/now/table/task_rel_ci
+        resource: incident
         data:
-          type: "fixed by"  # Adjust this based on your ServiceNow instance
-          change_request: "214c4505c35b42105f61921ed40131bd"
-          incident: "4715ab62a9fe1981018c3efb96143495"
+          rfc: 
+            link: "https://dev275456.service-now.com/api/now/table/change_request/e74cc105c35b42105f61921ed4013179",
+            value: "e74cc105c35b42105f61921ed4013179"
       register: link_result
 
 
