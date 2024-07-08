@@ -34,8 +34,8 @@
 
   - name: add rippademo.conf
     ansible.builtin.template:
-      src: rippademo.conf.j2
-      dest: /etc/httpd/conf.d/rippademo.conf
+      src: "{{ dns_name }}.conf.j2"
+      dest: /etc/httpd/conf.d/{{ dns_name }}.conf
 
   - name: httpd running
     ansible.builtin.service:
