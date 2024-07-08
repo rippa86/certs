@@ -30,22 +30,19 @@
       register: change_result
       ignore_errors: yes
     
-    - name: Create change request
-      servicenow.itsm.change_request:
-        instance:
+    - name: Link incident to change record
+      servicenow.itsm.api:
+        instance: 
           host: "{{ instance }}"
           username: "{{ username }}"
           password: "{{ password }}"
-        type: normal
-        state: new
-        requested_by: AAP
-        short_description: "{{ inc_number }}"
-        description: "creating a new SSL certificate for rippademo.com"
-        priority: moderate
-        risk: low
-        incidents_fixed_by_change: 4715ab62a9fe1981018c3efb96143495
-      register: change_result
-      ignore_errors: yes
+        action: post
+        resource: task_rel_ci
+        data:
+          type: "fixed by"  # Adjust this based on your ServiceNow instance
+          change_request: "214c4505c35b42105f61921ed40131bd"
+          incident: "4715ab62a9fe1981018c3efb96143495"
+      register: link_result
 
 
 
