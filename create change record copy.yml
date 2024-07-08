@@ -40,7 +40,7 @@
         resource: incident
         data:
           rfc: 
-            link: "https://dev275456.service-now.com/api/now/table/change_request/e74cc105c35b42105f61921ed4013179",
+            link: "https://dev275456.service-now.com/api/now/table/change_request/e74cc105c35b42105f61921ed4013179"
             value: "e74cc105c35b42105f61921ed4013179"
       register: link_result
 
