@@ -37,7 +37,7 @@
           username: "{{ username }}"
           password: "{{ password }}"
         action: post
-        resource: task_rel_ci
+        resource: /api/now/table/task_rel_ci
         data:
           type: "fixed by"  # Adjust this based on your ServiceNow instance
           change_request: "214c4505c35b42105f61921ed40131bd"
