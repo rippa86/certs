@@ -1,0 +1,17 @@
+<VirtualHost *:80>
+    ServerName rippasdemo.com
+    ServerAlias www.rippasdemo.com
+    DocumentRoot /var/www/html
+
+    <Directory /var/www/html>
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    ErrorLog /var/log/httpd/rippasdemo_error.log
+    CustomLog /var/log/httpd/rippasdemo_access.log combined
+RewriteEngine on
+RewriteCond %{SERVER_NAME} =www.rippasdemo.com [OR]
+RewriteCond %{SERVER_NAME} =rippasdemo.com
+RewriteRule ^ https://%{SERVER_NAME}%{REQUEST_URI} [END,NE,R=permanent]
+</VirtualHost>
