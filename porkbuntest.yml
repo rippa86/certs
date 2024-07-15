@@ -14,7 +14,12 @@
         apikey: "{{ dns_api_key }}"
       body_format: json
     register: results
-  
+    
+  - name: set stats
+    ansible.builtin.set_stats:
+      data:
+        dns_name: "{{ domain_name }}"
+        
   - name: print request results
     debug:
       var: results
