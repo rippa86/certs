@@ -20,7 +20,7 @@
       enabled: yes
 
   - name: Obtain SSL certificate from Let's Encrypt
-    ansible.builtin.command: certbot --apache -n -d rippasdemo.com --non-interactive --agree-tos --email rippas@rippasdemo.com
+    ansible.builtin.command: "certbot --apache -n -d {{ dns_name }}.com --non-interactive --agree-tos --email rippas@{{ dns_name }}.com"
     register: certbot_result
 
   - name: Debug Certbot result
