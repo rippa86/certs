@@ -6,7 +6,7 @@
   
   tasks:
 
-  - name: Update ServiceNow ticket to close
+  - name: Update ServiceNow ticket to review
     servicenow.itsm.change_request:
       instance:
         host: "{{ instance }}"
@@ -16,6 +16,7 @@
       state: review
       number: "{{ chg_number }}"
     register: change_result
+    ignore_errors: yes
     
   - name: Update ServiceNow ticket to close
     servicenow.itsm.change_request:
