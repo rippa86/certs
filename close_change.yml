@@ -18,8 +18,8 @@
   #       work_notes: "AAP is handling renewal. . . "
   #   register: snow_var
     
-  - ansible.builtin.set_fact:
-      chg_number: "{{ snow_var.record.number }}"
+  # - ansible.builtin.set_fact:
+  #     chg_number: "{{ snow_var.record.number }}"
   - name: Update ServiceNow ticket to review
     servicenow.itsm.change_request:
       instance:
