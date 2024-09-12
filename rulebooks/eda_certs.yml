@@ -10,7 +10,7 @@
         table: incident
         interval: 1
   rules:
-    - name: Augment Incident
+    - name: Incident TVT
       condition: event.cmdb_ci is defined
       actions:
         - debug:
