@@ -16,7 +16,7 @@
         - debug:
             var: event
         - run_job_template:
-            organization: "default"
+            organization: "Default"
             name: "TVT Tests"
     - name: Debug everything else
       condition: event.cmdb_ci is not defined
