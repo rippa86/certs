@@ -5,18 +5,18 @@
   gather_facts: no
   
   tasks:
-  - name: Update ServiceNow ticket to indicate start
-    servicenow.itsm.api:
-      instance:
-        host: "{{ instance }}"
-        username: "{{ username }}"
-        password: "{{ password }}"
-      resource: change
-      action: patch
-      sys_id: "{{ chg_id }}"
-      data:
-        work_notes: "AAP is handling renewal. . . "
-    register: snow_var
+  # - name: Update ServiceNow ticket to indicate start
+  #   servicenow.itsm.api:
+  #     instance:
+  #       host: "{{ instance }}"
+  #       username: "{{ username }}"
+  #       password: "{{ password }}"
+  #     resource: change
+  #     action: patch
+  #     sys_id: "{{ chg_id }}"
+  #     data:
+  #       work_notes: "AAP is handling renewal. . . "
+  #   register: snow_var
     
   - ansible.builtin.set_fact:
       chg_number: "{{ snow_var.record.number }}"
