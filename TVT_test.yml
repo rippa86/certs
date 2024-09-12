@@ -28,5 +28,6 @@
           data:
             error: "{{ uriresults.msg }}"
             url: "{{ url }}"
+      - ansible.builtin.include_tasks: EDA_inputs.yml
       - fail:
           msg: "TVT Test Failure"
