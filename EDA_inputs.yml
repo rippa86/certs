@@ -35,7 +35,7 @@
     chg_sysid: "{{ change_result.record.sys_id }}"
 
 - ansible.builtin.set_fact:
-      message: "{{ inc_number }} - Rippademo.com TVT test Failure, Change created automatically for remedication: {{ chg_number }}"
+    message: "{{ inc_number }} - Rippademo.com TVT test Failure, Change created automatically for remedication: {{ chg_number }}"
 - name: Post URL to Slack channel
   community.general.slack:
     token: "{{ slack_token }}"
