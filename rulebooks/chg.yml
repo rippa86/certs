@@ -7,7 +7,8 @@
         instance: "{{ snow_instance }}"
         username: "{{ snow_username }}"
         password: "{{ snow_password }}"
-        table: change_request
+        #table: change_request
+        table: sys_audit
         interval: 1
   rules:
     - name: View CHG
