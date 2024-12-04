@@ -59,7 +59,7 @@
         action: patch
         sys_id: "{{ inc_sysid }}"
         data:
-          work_notes: "{{ chg_number }} Raised via Ansible."
+          work_notes: "{{ change_result.record.number }} Raised via Ansible."
       register: snow_var
     # - name: Link incident to change record
     #   servicenow.itsm.snow_record:
