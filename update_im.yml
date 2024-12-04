@@ -17,5 +17,5 @@
       action: patch
       sys_id: "{{ inc_sysid }}"
       data:
-        work_notes: "TVT Test has failed: {{ uriresults }}"
+        work_notes: "TVT Test has failed: {{ error }}"
     register: snow_var
