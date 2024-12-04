@@ -30,6 +30,6 @@
             url: "{{ url }}"
             inc_number: "{{ ansible_eda.event.number}}"
             inc_sysid: "{{ ansible_eda.event.sys_id }}"
-      - ansible.builtin.include_tasks: EDA_inputs.yml
+      # - ansible.builtin.include_tasks: EDA_inputs.yml
       - fail:
           msg: "TVT Test Failure"
