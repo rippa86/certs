@@ -1,8 +1,9 @@
 - name: set stats
   ansible.builtin.set_stats:
-    inc_number: "{{ ansible_eda.event.number}}"
-    inc_sysid: "{{ ansible_eda.event.sys_id }}"
-    uriresults: "{{ uriresults.msg }}"
+    data:
+      inc_number: "{{ ansible_eda.event.number}}"
+      inc_sysid: "{{ ansible_eda.event.sys_id }}"
+      uriresults: "{{ uriresults.msg }}"
 # - name: Update ServiceNow ticket to indicate start
 #   servicenow.itsm.api:
 #     instance:
