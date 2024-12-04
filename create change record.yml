@@ -48,18 +48,19 @@
         data:
           chg_number: "{{ change_result.record.number }}"
           chg_sysid: "{{ change_result.record.sys_id }}"
+
     - name: Update ServiceNow ticket to indicate start
-        servicenow.itsm.api:
-          instance:
-            host: "{{ instance }}"
-            username: "{{ username }}"
-            password: "{{ password }}"
-          resource: incident
-          action: patch
-          sys_id: "{{ inc_sysid }}"
-          data:
-            work_notes: "{{ chg_number }} Raised via Ansible."
-        register: snow_var
+      servicenow.itsm.api:
+        instance:
+          host: "{{ instance }}"
+          username: "{{ username }}"
+          password: "{{ password }}"
+        resource: incident
+        action: patch
+        sys_id: "{{ inc_sysid }}"
+        data:
+          work_notes: "{{ chg_number }} Raised via Ansible."
+      register: snow_var
     # - name: Link incident to change record
     #   servicenow.itsm.snow_record:
     #     instance: "{{ instance }}"
