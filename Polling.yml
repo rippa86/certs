@@ -29,7 +29,7 @@
     register: result
     retries: 1000  # Number of attempts
     delay: 10    # Wait time between attempts (in seconds)
-    until: result.records.state == 'implement'
+    until: result.records[0].state == 'implement'
 
   - name: debug me
     ansible.builtin.debug:
