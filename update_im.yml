@@ -25,9 +25,9 @@
   - name: Attach the log files
     servicenow.itsm.attachment_upload:
       instance:
-        host: "{{ snow_instance }}"
-        username: "{{ snow_username }}"
-        password: "{{ snow_password }}"
+        host: "{{ instance }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
       table_name: incident
       table_sys_id: "{{ inc_sysid }}"
       attachments:
