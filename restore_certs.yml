@@ -1,0 +1,25 @@
+---
+- name: renew certs using certbot role
+  hosts: web_server
+
+  tasks:
+  - name: Copy directory to target location
+    ansible.builtin.copy:
+      src: /root/backup/rippademo.com
+      dest: /etc/letsencrypt/live/
+      remote_src: true
+
+  - name: Copy directory to target location
+    ansible.builtin.copy:
+      src: /root/backup/rippademo-le-ssl.conf
+      dest: /etc/httpd/conf.d/
+      remote_src: true
+
+  - name: Restart Apache to apply new certificate
+    ansible.builtin.service:
+      name: httpd
+      state: restarted    
+  
+  # - name: force renew
+  #   ansible.builtin.shell: sudo certbot renew --force-renewal
+  #   tags: force
