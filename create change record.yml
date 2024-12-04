@@ -3,13 +3,13 @@
   hosts: localhost
   gather_facts: no
 
-  vars:
-    incident_number: "INC0010001"  # Replace with your incident number
-    change_request_data:
-      short_description: "Generate new SSL Cert"
-      description: "creating a new SSL certificate for rippademo.com"
-      category: "Software"
-      priority: "2"
+  # vars:
+  #   incident_number: "INC0010001"  # Replace with your incident number
+  #   change_request_data:
+  #     short_description: "Generate new SSL Cert"
+  #     description: "creating a new SSL certificate for rippademo.com"
+  #     category: "Software"
+  #     priority: "2"
 
   tasks:
     - name: Create change request
@@ -22,10 +22,25 @@
         state: new
         requested_by: AAP
         short_description: "{{ inc_number }}"
-        description: "creating a new SSL certificate for rippademo.com"
+        description: "creating a new SSL certificate for {{ url }}"
         priority: moderate
         risk: low
       register: change_result
+
+    # - name: Create change request
+    #   servicenow.itsm.change_request:
+    #     instance:
+    #       host: "{{ instance }}"
+    #       username: "{{ username }}"
+    #       password: "{{ password }}"
+    #     type: normal
+    #     state: new
+    #     requested_by: AAP
+    #     short_description: "{{ inc_number }}"
+    #     description: "creating a new SSL certificate for rippademo.com"
+    #     priority: moderate
+    #     risk: low
+    #   register: change_result
 
     - name: set stats
       ansible.builtin.set_stats:

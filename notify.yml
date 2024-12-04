@@ -1,9 +1,10 @@
 - name: create rhel9 ec2 instance
   hosts: localhost
+  gather_facts: no
 
   tasks:
   - ansible.builtin.set_fact:
-      message: "{{ inc_number }} - Rippademo.com TVT test Failure, Change created automatically for remedication: {{ chg_number }}"
+      message: "{{ inc_number }} - {{ url }} Certificate test Failure, Change created automatically for remedication: {{ chg_number }}"
   - name: Post URL to Slack channel
     community.general.slack:
       token: "{{ slack_token }}"

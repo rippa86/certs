@@ -1,19 +1,20 @@
 - name: set stats
-  ansible.builtin.set_fact:
+  ansible.builtin.set_stats:
     inc_number: "{{ ansible_eda.event.number}}"
     inc_sysid: "{{ ansible_eda.event.sys_id }}"
-- name: Update ServiceNow ticket to indicate start
-  servicenow.itsm.api:
-    instance:
-      host: "{{ instance }}"
-      username: "{{ username }}"
-      password: "{{ password }}"
-    resource: incident
-    action: patch
-    sys_id: "{{ inc_sysid }}"
-    data:
-      work_notes: "TVT Test has failed: {{ uriresults.msg }}"
-  register: snow_var
+    uriresults: "{{ uriresults.msg }}"
+# - name: Update ServiceNow ticket to indicate start
+#   servicenow.itsm.api:
+#     instance:
+#       host: "{{ instance }}"
+#       username: "{{ username }}"
+#       password: "{{ password }}"
+#     resource: incident
+#     action: patch
+#     sys_id: "{{ inc_sysid }}"
+#     data:
+#       work_notes: "TVT Test has failed: {{ uriresults.msg }}"
+#   register: snow_var
 
 - name: Create change request
   servicenow.itsm.change_request:
@@ -35,7 +36,7 @@
     chg_sysid: "{{ change_result.record.sys_id }}"
 
 - ansible.builtin.set_fact:
-    message: "{{ inc_number }} - Rippademo.com TVT test Failure, Change created automatically for remedication: {{ chg_number }}"
+    message: "{{ inc_number }} - "{{ url }}" TVT test Failure, Change created automatically for remedication: {{ chg_number }}"
 - name: Post URL to Slack channel
   community.general.slack:
     token: "{{ slack_token }}"

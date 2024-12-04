@@ -1,0 +1,21 @@
+
+---
+- name: ServiceNow Create Incident
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  
+  tasks:
+
+  - name: Update ServiceNow ticket to indicate start
+    servicenow.itsm.api:
+      instance:
+        host: "{{ instance }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+      resource: incident
+      action: patch
+      sys_id: "{{ inc_sysid }}"
+      data:
+        work_notes: "TVT Test has failed: {{ uriresults }}"
+    register: snow_var

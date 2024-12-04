@@ -25,11 +25,17 @@
       enabled: true
       state: started
 
+  - name: add to path
+    ansible.builtin.command: "sudo ln -s /var/lib/snapd/snap /snap"
+    register: certbot_result
   - name: Install certbot
-    ansible.builtin.command: "snap install --classic certbot"
+    ansible.builtin.command: "sudo snap install --classic certbot"
     register: certbot_result
 
   - name: add to path
-    ansible.builtin.command: "snap install --classic certbot"
+    ansible.builtin.command: "sudo snap install --classic certbot"
     register: certbot_result
-  
+
+  - name: add to path
+    ansible.builtin.command: "sudo ln -s /snap/bin/certbot /usr/bin/certbot"
+    register: certbot_result
