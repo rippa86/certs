@@ -16,29 +16,29 @@
 #       work_notes: "TVT Test has failed: {{ uriresults.msg }}"
 #   register: snow_var
 
-- name: Create change request
-  servicenow.itsm.change_request:
-    instance:
-      host: "{{ instance }}"
-      username: "{{ username }}"
-      password: "{{ password }}"
-    type: normal
-    state: new
-    requested_by: AAP
-    short_description: "{{ inc_number }}"
-    description: "creating a new SSL certificate for rippademo.com"
-    priority: moderate
-    risk: low
-  register: change_result
-- name: set stats
-  ansible.builtin.set_fact:
-    chg_number: "{{ change_result.record.number }}"
-    chg_sysid: "{{ change_result.record.sys_id }}"
+# - name: Create change request
+#   servicenow.itsm.change_request:
+#     instance:
+#       host: "{{ instance }}"
+#       username: "{{ username }}"
+#       password: "{{ password }}"
+#     type: normal
+#     state: new
+#     requested_by: AAP
+#     short_description: "{{ inc_number }}"
+#     description: "creating a new SSL certificate for rippademo.com"
+#     priority: moderate
+#     risk: low
+#   register: change_result
+# - name: set stats
+#   ansible.builtin.set_fact:
+#     chg_number: "{{ change_result.record.number }}"
+#     chg_sysid: "{{ change_result.record.sys_id }}"
 
-- ansible.builtin.set_fact:
-    message: "{{ inc_number }} - "{{ url }}" TVT test Failure, Change created automatically for remedication: {{ chg_number }}"
-- name: Post URL to Slack channel
-  community.general.slack:
-    token: "{{ slack_token }}"
-    channel: "#devops"
-    msg: "{{ message }}"
+# - ansible.builtin.set_fact:
+#     message: "{{ inc_number }} - "{{ url }}" TVT test Failure, Change created automatically for remedication: {{ chg_number }}"
+# - name: Post URL to Slack channel
+#   community.general.slack:
+#     token: "{{ slack_token }}"
+#     channel: "#devops"
+#     msg: "{{ message }}"
