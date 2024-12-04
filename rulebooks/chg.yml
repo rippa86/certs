@@ -7,8 +7,8 @@
         instance: "{{ snow_instance }}"
         username: "{{ snow_username }}"
         password: "{{ snow_password }}"
-        #table: change_request
-        table: sys_audit
+        table: change_request
+        #table: sys_audit
         interval: 1
   rules:
     - name: View CHG
@@ -18,7 +18,7 @@
             var: event
         - run_job_template:
             organization: "Default"
-            name: "TVT Tests"
+            name: "Implementation Workflow"
     - name: Debug everything else
       condition: event.cmdb_ci is not defined
       action:
