@@ -27,7 +27,10 @@
           password: "{{ password }}"
       number: "{{ ansible_eda.event.number}}"
     register: result
+    retries: 1000  # Number of attempts
+    delay: 10    # Wait time between attempts (in seconds)
+    until: result.records.state == 'implement'
 
-  - name: debug me 
+  - name: debug me
     ansible.builtin.debug:
       var: result
