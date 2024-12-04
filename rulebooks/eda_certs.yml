@@ -15,7 +15,8 @@
       actions:
         - debug:
             var: event
-        - run_job_template:
+        #- run_job_template:
+        - run_workflow_template:
             organization: "Default"
             name: "TVT Tests"
     - name: Debug everything else

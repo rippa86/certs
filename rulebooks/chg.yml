@@ -16,9 +16,9 @@
       actions:
         - debug:
             var: event
-        - run_job_template:
+        - run_workflow_template:
             organization: "Default"
-            name: "Implementation Workflow"
+            name: "renew cert workflow"
     - name: Debug everything else
       condition: event.cmdb_ci is not defined
       action:
