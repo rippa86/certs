@@ -19,3 +19,17 @@
       data:
         work_notes: "TVT Test has failed: {{ error }}"
     register: snow_var
+  - name: Gather journal /var/log/messages
+    ansible.builtin.shell: "echo httpd.service - The Apache HTTP Server Loaded: loaded (/usr/lib/systemd/system/httpd.service; enabled; preset: disabled) > /tmp/{{ inc_number }}_journal.log"
+    register: journal_log
+  - name: Attach the log files
+    servicenow.itsm.attachment_upload:
+      instance:
+        host: "{{ snow_instance }}"
+        username: "{{ snow_username }}"
+        password: "{{ snow_password }}"
+      table_name: incident
+      table_sys_id: "{{ inc_sysid }}"
+      attachments:
+        - path: "/tmp/{{ inc_number }}_journal.log"
+          name: "{{ inc_number }}_journal.log"
