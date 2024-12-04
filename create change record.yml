@@ -23,6 +23,7 @@
         requested_by: AAP
         short_description: "{{ inc_number }}"
         description: "creating a new SSL certificate for {{ url }}, to resolve: {{ error }}"
+        assignment_group: Software
         priority: moderate
         risk: low
       register: change_result

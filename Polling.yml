@@ -1,0 +1,25 @@
+---
+- name: Create a change record in ServiceNow and attach an incident
+  hosts: localhost
+  gather_facts: no
+
+  # vars:
+  #   incident_number: "INC0010001"  # Replace with your incident number
+  #   change_request_data:
+  #     short_description: "Generate new SSL Cert"
+  #     description: "creating a new SSL certificate for rippademo.com"
+  #     category: "Software"
+  #     priority: "2"
+
+  tasks:
+
+  - name: set stats
+    ansible.builtin.set_stats:
+      data:
+        chg_number: "{{ ansible_eda.event.number}}"
+        chg_sysid: "{{ ansible_eda.event.sys_id }}"
+
+  - name: Retrieve change request tasks by number
+    servicenow.itsm.change_request_info:
+      number: "{{ ansible_eda.event.number}}"
+    register: result
