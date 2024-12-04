@@ -1,0 +1,35 @@
+---
+- name: kill it
+  hosts: web_server
+
+  tasks:
+  - name: Copy directory to target location
+    ansible.builtin.copy:
+      src: /etc/letsencrypt/live/rippademo.com
+      dest: /root/backup/
+      remote_src: true
+
+  - name: Copy directory to target location
+    ansible.builtin.copy:
+      src: /etc/httpd/conf.d/rippademo-le-ssl.conf
+      dest: /root/backup/
+      remote_src: true
+
+  - name: Delete the directory and its contents
+    ansible.builtin.file:
+      path: /etc/letsencrypt/live/rippademo.com
+      state: absent
+
+  - name: Delete the directory and its contents
+    ansible.builtin.file:
+      path: /etc/httpd/conf.d/rippademo-le-ssl.conf
+      state: absent
+
+  - name: Restart Apache to apply new certificate
+    ansible.builtin.service:
+      name: httpd
+      state: restarted    
+  
+  # - name: force renew
+  #   ansible.builtin.shell: sudo certbot renew --force-renewal
+  #   tags: force
