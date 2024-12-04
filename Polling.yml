@@ -21,5 +21,13 @@
 
   - name: Retrieve change request tasks by number
     servicenow.itsm.change_request_info:
+      instance:
+          host: "{{ instance }}"
+          username: "{{ username }}"
+          password: "{{ password }}"
       number: "{{ ansible_eda.event.number}}"
     register: result
+
+  - name: debug me 
+    ansible.builtin.debug:
+      var: result
