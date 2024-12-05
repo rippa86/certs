@@ -8,17 +8,14 @@
       disable_gpg_check: true
       name: "https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm"
       state: present
-# why no
-  - name: install SSL package
-    ansible.builtin.dnf:
-      name: mod_ssl
-      state: present
 
-  - name: install SNAPD
-    ansible.builtin.dnf:
-      name: snapd
+  - name: install open ssl
+    ansible.builtin.dnf: 
+      name: 
+        - snapd
+        - mod_ssl
+        - httpd
       state: present
-
 
   - name: add to path
     ansible.builtin.command: "systemctl enable --now snapd.socket"
