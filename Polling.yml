@@ -12,7 +12,8 @@
   #     priority: "2"
 
   tasks:
-  - ansible.builtin.pause:
+  - name: Pause for 5 minutes to build app cache
+    ansible.builtin.pause:
       seconds: 30
       
   - name: set stats
