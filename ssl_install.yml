@@ -24,6 +24,10 @@
   - name: add to path
     ansible.builtin.command: "ln -s /var/lib/snapd/snap /snap"
     register: certbot_result
+
+  - ansible.builtin.pause:
+      seconds: 15
+    
     
   - name: Install certbot
     ansible.builtin.command: "snap install --classic certbot"
