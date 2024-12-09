@@ -21,7 +21,7 @@
       data:
         chg_number: "{{ ansible_eda.event.number}}"
         chg_sysid: "{{ ansible_eda.event.sys_id }}"
-  - ansible.builtin.
+
   - name: Retrieve change request tasks by number
     servicenow.itsm.change_request_info:
       instance:
