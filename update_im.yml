@@ -15,7 +15,7 @@
         password: "{{ password }}"
       resource: incident
       action: patch
-      sys_id: "{{ inc_sysid }}"
+      sys_id: "{{ ansible_eda.event.sys_id }}"
       data:
         work_notes: "TVT Test has failed: {{ error }}"
     register: snow_var
