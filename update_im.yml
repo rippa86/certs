@@ -29,7 +29,7 @@
         username: "{{ username }}"
         password: "{{ password }}"
       table_name: incident
-      table_sys_id: "{{ inc_sysid }}"
+      table_sys_id: "{{ ansible_eda.event.sys_id }}"
       attachments:
         - path: "/tmp/incident_journal.log"
           name: "incident_journal.log"
